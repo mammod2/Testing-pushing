@@ -1,8 +1,9 @@
 import LimitedInput from "./LimitedInput";
 import { withKnobs, number } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
+import { storiesOf } from "@storybook/vue";
 import { linkTo } from "@storybook/addon-links";
-
+// import "component-source/register";
 export default {
   title: "Forms/LimitedInput",
   decorators: [() => "<div class='m-4'><story/></div>", withKnobs],
@@ -17,20 +18,34 @@ it will gently hint users to reduce the size of their *Id* before they hit submi
   },
 };
 
-export const SimpleStory = () => ({
-  render() {
-    return <LimitedInput />;
-  },
-});
+// export const SimpleStory = () => ({
+//   render() {
+//     return <LimitedInput />;
+//   }
+// });
 
-SimpleStory.story = {
-  name: "Simple Story (bis)",
-  parameters: {
-    notes: `
-    This is the simplest story
-    `,
-  },
-};
+storiesOf("LimitedInput", module).add(
+  "Input",
+  () => ({
+    components: { LimitedInput },
+    template: "<LimitedInput/>",
+  }),
+  {
+    source: {
+      // Note: Path should be start from /src/ and must be end with file extension
+      publicPath: "./src/components/LimitedInput.vue",
+    },
+  }
+);
+
+// SimpleStory.story = {
+//   name: "Simple Story (bis)",
+//   parameters: {
+//     notes: `
+//     This is the simplest story
+//     `,
+//   },
+// };
 
 export const StoryForActions = () => ({
   render() {
